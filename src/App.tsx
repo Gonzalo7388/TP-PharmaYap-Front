@@ -1,16 +1,20 @@
-import { useState } from 'react';
-import Clientes from './Clientes';
-import Mono from './Mono';
+// src/App.tsx
+import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AppRoutes from "./routes/Index"; 
 
-function App() {
-  const [vista, setVista] = useState<'clientes' | 'mono'>('clientes');
+const App = () => {
+    const [menuOpen, setMenuOpen] = useState(false); 
 
-  return (
-    <>
-      {vista === 'clientes' && <Clientes setVista={setVista} />}
-      {vista === 'mono' && <Mono setVista={setVista} />}
-    </>
-  );
-}
+    return (
+        <BrowserRouter>
+            <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> 
+            <AppRoutes />
+            <Footer />
+        </BrowserRouter>
+    );
+};
 
 export default App;

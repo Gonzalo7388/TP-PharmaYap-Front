@@ -2,7 +2,7 @@
 import React from "react";
 
 interface MonoProps {
-  setVista: (vista: 'clientes' | 'mono') => void;
+  setVista?: (vista: 'clientes' | 'mono') => void;
 }
 
 const Mono: React.FC<MonoProps> = ({ setVista }) => {
