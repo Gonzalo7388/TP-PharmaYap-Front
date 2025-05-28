@@ -5,7 +5,7 @@ import Categoria from "../pages/Categoria";
 import Clientes from "../pages/Clientes";
 import Proveedores from "../pages/Proveedores";
 import HomePage  from "../pages/HomePage";
-import Mono from "../pages/Mono";
+import Trabajadores from "../pages/Trabajadores";
 
 const AppRoutes = () => {
   return (
@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <Route path="/crud/categorias" element={<Categoria />} />
       <Route path="/crud/usuarios" element={<Clientes />} />
       <Route path="/crud/proveedores" element={<Proveedores />} />
-      <Route path="/mono" element={<Mono />} />
+      <Route path="/crud/trabajadores" element={<Trabajadores />} />
     </Routes>
   );
 };

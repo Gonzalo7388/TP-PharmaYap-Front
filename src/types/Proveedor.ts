@@ -1,0 +1,9 @@
+export interface Proveedor {
+  id: number;
+  nombre: string;
+  telefono: string;
+  correo: string;
+  direccion: string;
+  ruc: string;
+  estado: string;
+}
