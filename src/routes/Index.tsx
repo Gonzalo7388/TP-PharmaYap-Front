@@ -1,10 +1,11 @@
 // src/routes/index.tsx
 import { Routes, Route } from "react-router-dom";
 import Productos from "../pages/Productos";
+import PrincipiosActivos from "../pages/PrincipiosActivos";
 import Categoria from "../pages/Categoria";
 import Clientes from "../pages/Clientes";
 import Proveedores from "../pages/Proveedores";
-import HomePage  from "../pages/HomePage";
+import HomePage from "../pages/HomePage";
 import Trabajadores from "../pages/Trabajadores";
 
 const AppRoutes = () => {
@@ -12,10 +13,12 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/crud/productos" element={<Productos />} />
+      <Route path="/crud/principios-activos" element={<PrincipiosActivos />} />
       <Route path="/crud/categorias" element={<Categoria />} />
       <Route path="/crud/usuarios" element={<Clientes />} />
       <Route path="/crud/proveedores" element={<Proveedores />} />
       <Route path="/crud/trabajadores" element={<Trabajadores />} />
+
     </Routes>
   );
 };

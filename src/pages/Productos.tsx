@@ -4,8 +4,13 @@ import ProductoTable from '../components/Productos/ProductoTable';
 import ProductoFormModal from '../components/Productos/ProductoFormModal';
 import ProductoViewModal from '../components/Productos/ProductoViewModal';
 import { Producto } from '../types/Producto';
-import { getProductos } from '../api/productos'; // o donde esté tu API
 import { Categoria } from '../types/Categoria';
+
+import { getProductos } from '../api/productos'; // 
+import { createProducto } from '../api/productos'; // 
+import { deleteProducto } from '../api/productos'; // 
+import { updateProducto } from '../api/productos'; //
+
 
 export default function ProductoPage() {
   const [productos, setProductos] = useState<Producto[]>([]);
@@ -15,15 +20,16 @@ export default function ProductoPage() {
   const [productoVisualizar, setProductoVisualizar] = useState<Producto | null>(null);
 
   // useEffect para cargar productos desde API al montar el componente
+  const fetchProductos = async () => {
+    try {
+      const data = await getProductos();
+      setProductos(data);
+    } catch (error) {
+      console.error('Error cargando productos:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        const data = await getProductos();
-        setProductos(data);
-      } catch (error) {
-        console.error('Error cargando productos:', error);
-      }
-    };
     fetchProductos();
   }, []);
 
@@ -35,21 +41,47 @@ export default function ProductoPage() {
     setProductoVisualizar(producto);
   };
 
-  const handleSave = (producto: Producto, isNew: boolean) => {
-    if (isNew) {
-      setProductos(prev => [...prev, producto]);
-    } else {
-      setProductos(prev => prev.map(p => (p._id === producto._id ? producto : p)));
+  const handleSave = async (producto: Producto, isNew: boolean) => {
+    try {
+      const payload: any = {
+        ...producto,
+        categoria: typeof producto.categoria === 'object' ? producto.categoria._id : producto.categoria,
+        principio_activo: typeof producto.principio_activo === 'object' ? producto.principio_activo._id : producto.principio_activo,
+      };
+
+      // Eliminar campos no deseados
+      delete payload._id;
+      delete payload.createdAt;
+      delete payload.updatedAt;
+
+      if (isNew) {
+        await createProducto(payload);
+      } else {
+        await updateProducto(producto._id, payload); 
+      }
+
+      await fetchProductos();
+      setEditProducto(null);
+      setNuevoProducto(null);
+    } catch (error) {
+      console.error("Error al guardar producto:", error);
     }
-    setEditProducto(null);
-    setNuevoProducto(null);
   };
 
-  const handleDelete = (id: string) => {
+
+
+
+  const handleDelete = async (id: string) => {
     if (confirm('¿Estás seguro de eliminar este producto?')) {
-      setProductos(prev => prev.filter(p => p._id !== id));
+      try {
+        await deleteProducto(id); // llamada al backend
+        await fetchProductos();   // recarga productos actualizados
+      } catch (error) {
+        console.error("Error al eliminar producto:", error);
+      }
     }
   };
+
 
   return (
     <>
@@ -70,10 +102,11 @@ export default function ProductoPage() {
               fecha_vencimiento: '',
               es_recetado: false,
               categoria: {
-                id: '',      // solo las propiedades definidas en Categoria
+                _id: '',
                 nombre: '',
                 descripcion: '',
               } as Categoria,
+              principio_activo: '', // ✅ agregado
               createdAt: '',
               updatedAt: '',
             })
@@ -98,6 +131,7 @@ export default function ProductoPage() {
             setEditProducto(null);
             setNuevoProducto(null);
           }}
+
           onSave={handleSave}
           isNew={!editProducto}
         />

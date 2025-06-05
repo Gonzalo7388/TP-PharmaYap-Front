@@ -1,5 +1,5 @@
 import React from "react";
-import { FiBox, FiTag, FiUsers, FiTruck, FiClipboard } from "react-icons/fi";
+import { FiBox, FiTag, FiUsers, FiTruck, FiClipboard, FiActivity } from "react-icons/fi";
 import NavButton from "./NavButton";  // Importar el componente NavButton
 import UserIcons from "./UserIcons";  // Importar el componente UserIcons
 
@@ -22,10 +22,12 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex space-x-8 flex-grow">  {/* Añadí flex-grow para expandir el navbar */}
             <NavButton to="/" label="Inicio" icon={<FiBox className="mr-1" />} />
             <NavButton to="/crud/productos" label="Productos" icon={<FiBox className="mr-1" />} />
+            <NavButton to="/crud/principios-activos" label="Principios Activos" icon={<FiActivity className="mr-1" />} />
             <NavButton to="/crud/categorias" label="Categorías" icon={<FiTag className="mr-1" />} />
             <NavButton to="/crud/usuarios" label="Clientes" icon={<FiUsers className="mr-1" />} />
             <NavButton to="/crud/Trabajadores" label="Trabajadores" icon={<FiClipboard className="mr-1" />} />
             <NavButton to="/crud/proveedores" label="Proveedores" icon={<FiTruck className="mr-1" />} />
+            
           </nav>
           
           {/* Íconos a la derecha */}

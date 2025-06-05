@@ -1,5 +1,6 @@
 // src/types/Producto.ts
 import { Categoria } from './Categoria';
+import { PrincipioActivo } from './PrincipioActivo';
 
 export interface Producto {
   _id: string;
@@ -13,7 +14,8 @@ export interface Producto {
   registro_sanitario: string;
   fecha_vencimiento: string;
   es_recetado: boolean;
-  categoria: Categoria; // Esto es importante para mostrar el nombre
+  categoria: Categoria; // objeto categoría
+  principio_activo: PrincipioActivo | string; // puede ser solo id o objeto
   createdAt: string;
   updatedAt: string;
 }

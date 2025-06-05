@@ -10,7 +10,7 @@ export const updateCategoria = (id: string, data: { nombre: string; descripcion:
 export const deleteCategoria = (id: string) => axios.delete(`${"/categorias"}/${id}`);
 
 export const mapCategoria = (data: any): Categoria => ({
-  id: data._id,
+  _id: data._id,
   nombre: data.nombre,
   descripcion: data.descripcion,
 });

@@ -1,6 +1,6 @@
 // src/types/Categoria.ts
 export interface Categoria {
-    id: string;
+    _id: string;
     nombre: string;
     descripcion: string;
 }
