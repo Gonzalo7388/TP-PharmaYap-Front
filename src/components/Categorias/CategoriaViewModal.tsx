@@ -12,7 +12,7 @@ export default function CategoriaViewModal({ categoria, onClose }: Props) {
       <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md relative">
         <h2 className="text-xl font-bold mb-4 text-[#ca5c71]">Detalles de Categoría</h2>
         <div className="space-y-4">
-          <p><strong>ID:</strong> {categoria.id}</p>
+          <p><strong>ID:</strong> {categoria._id}</p>
           <p><strong>Nombre:</strong> {categoria.nombre}</p>
           <p><strong>Descripción:</strong> {categoria.descripcion}</p>
         </div>

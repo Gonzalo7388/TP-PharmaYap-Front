@@ -7,6 +7,7 @@ import Clientes from "../pages/Clientes";
 import Proveedores from "../pages/Proveedores";
 import HomePage from "../pages/HomePage";
 import Trabajadores from "../pages/Trabajadores";
+import Pedidos from "../pages/Pedido";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
       <Route path="/crud/usuarios" element={<Clientes />} />
       <Route path="/crud/proveedores" element={<Proveedores />} />
       <Route path="/crud/trabajadores" element={<Trabajadores />} />
+      <Route path="/crud/pedidos" element={<Pedidos />} />
 
     </Routes>
   );

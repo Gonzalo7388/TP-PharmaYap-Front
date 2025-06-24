@@ -27,6 +27,7 @@ const Header: React.FC = () => {
             <NavButton to="/crud/usuarios" label="Clientes" icon={<FiUsers className="mr-1" />} />
             <NavButton to="/crud/Trabajadores" label="Trabajadores" icon={<FiClipboard className="mr-1" />} />
             <NavButton to="/crud/proveedores" label="Proveedores" icon={<FiTruck className="mr-1" />} />
+            <NavButton to="/crud/pedidos" label="Pedidos" icon={<FiTruck className="mr-1" />} />
             
           </nav>
           

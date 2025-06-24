@@ -20,7 +20,7 @@ export default function CategoriaFormModal({ categoria, onClose, onChange, onSav
     <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md relative">
         <h2 className="text-xl font-bold mb-4 text-[#ca5c71]">
-          {categoria.id ? "Editar Categoría" : "Nueva Categoría"}
+          {categoria._id ? "Editar Categoría" : "Nueva Categoría"}
         </h2>
         <form
           onSubmit={(e) => {

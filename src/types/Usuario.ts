@@ -1,6 +1,6 @@
 // src/types/Usuario.ts
 export interface Usuario {
-  id: string;
+  _id: string;
   nombre: string;
   apellido: string;
   correo_electronico: string;

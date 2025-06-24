@@ -14,7 +14,7 @@ const TrabajadorActions: React.FC<TrabajadorActionsProps> = ({ trabajador, onEdi
   };
 
   const handleDelete = () => {
-    onDelete(trabajador.id);
+    onDelete(trabajador._id);
   };
 
   return (

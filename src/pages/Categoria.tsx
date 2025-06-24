@@ -28,7 +28,7 @@ export default function CategoriaPage() {
       .then((res) =>
         setCategorias(
           res.data.map((c: any) => ({
-            id: c._id,
+            _id: c._id,
             nombre: c.nombre,
             descripcion: c.descripcion,
           }))
@@ -49,7 +49,7 @@ export default function CategoriaPage() {
       createCategoria(nuevaCategoria)
         .then((res) => {
           const nueva = {
-            id: res.data._id,
+            _id: res.data._id,
             nombre: res.data.nombre,
             descripcion: res.data.descripcion,
           };
@@ -69,13 +69,13 @@ export default function CategoriaPage() {
       soloLetras(editCategoria.nombre.trim()) &&
       descripcionValida(editCategoria.descripcion.trim())
     ) {
-      updateCategoria(editCategoria.id, {
+      updateCategoria(editCategoria._id, {
         nombre: editCategoria.nombre,
         descripcion: editCategoria.descripcion,
       })
         .then(() => {
           setCategorias((prev) =>
-            prev.map((c) => (c.id === editCategoria.id ? editCategoria : c))
+            prev.map((c) => (c._id === editCategoria._id ? editCategoria : c))
           );
           setEditCategoria(null);
         })
@@ -88,7 +88,7 @@ export default function CategoriaPage() {
   const eliminarCategoria = (id: string) => {
     if (window.confirm("¿Eliminar categoría?")) {
       deleteCategoriaAPI(id)
-        .then(() => setCategorias((prev) => prev.filter((c) => c.id !== id)))
+        .then(() => setCategorias((prev) => prev.filter((c) => c._id !== id)))
         .catch(() => alert("Error al eliminar categoría"));
     }
   };
@@ -98,7 +98,7 @@ export default function CategoriaPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Gestión de Categorías</h1>
         <button
-          onClick={() => setNuevaCategoria({ id: "", nombre: "", descripcion: "" })}
+          onClick={() => setNuevaCategoria({ _id: "", nombre: "", descripcion: "" })}
           disabled={loading}
           className={`bg-[#ca5c71] text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors shadow-md flex items-center ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
