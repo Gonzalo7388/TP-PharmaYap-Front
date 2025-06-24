@@ -1,42 +1,50 @@
+// src/components/Pedidos/CartModal.tsx
 import React from "react";
-import { Producto } from "../../data/products"; // Using data/products for now as per your structure
-import { FiX, FiTrash2 } from "react-icons/fi"; // <--- ADD FiTrash2 here!
-
+import { FiX, FiTrash2 } from "react-icons/fi";
+import { Producto } from "../../data/products";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 interface CartItem {
   product: Producto;
   quantity: number;
 }
 
-interface CartModalProps {
-  showModal: boolean;
+interface CartModalProps { // Keep the original interface name
+  showModal: boolean; // Keep the original prop name
   onClose: () => void;
   cartItems: CartItem[];
   getCartTotal: () => number;
-  // Add the new props here:
-  onIncrementCart: (productId: number) => void; // <--- ADDED
-  onDecrementCart: (productId: number) => void; // <--- ADDED
-  onRemoveFromCart: (productId: number) => void; // <--- ADDED
+  onIncrementCart: (productId: number) => void;
+  onDecrementCart: (productId: number) => void;
+  onRemoveFromCart: (productId: number) => void;
 }
 
-const CartModal: React.FC<CartModalProps> = ({
-  showModal,
+const CartModal: React.FC<CartModalProps> = ({ // Keep the original component name
+  showModal, // Use 'showModal'
   onClose,
   cartItems,
   getCartTotal,
-  // Destructure the new props here so you can use them:
-  onIncrementCart,   // <--- ADDED
-  onDecrementCart,   // <--- ADDED
-  onRemoveFromCart,  // <--- ADDED
+  onIncrementCart,
+  onDecrementCart,
+  onRemoveFromCart,
 }) => {
-  if (!showModal) {
-    return null;
-  }
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-lg shadow-lg overflow-hidden">
-        {/* Modal Header */}
+    <>
+      {/* Overlay for background dimming - only visible when sidebar is open */}
+      <div
+        className={`fixed inset-0 bg-black transition-opacity duration-300 z-40 ${
+          showModal ? "opacity-60 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose} // Click outside to close
+      ></div>
+
+      {/* Sidebar itself */}
+      <div
+        className={`fixed top-0 right-0 h-full bg-white shadow-xl transform transition-transform duration-300 z-50
+                    ${showModal ? "translate-x-0" : "translate-x-full"}
+                    w-full sm:w-96 flex flex-col`} // Adjusted width for responsiveness
+      >
+        {/* Sidebar Header */}
         <div className="px-6 py-4 flex items-center justify-between border-b">
           <h3 className="text-xl font-bold">Carrito de Compras</h3>
           <button
@@ -48,8 +56,8 @@ const CartModal: React.FC<CartModalProps> = ({
           </button>
         </div>
 
-        {/* Modal Body: Cart Items List */}
-        <div className="max-h-[50vh] overflow-y-auto divide-y divide-gray-200">
+        {/* Sidebar Body: Cart Items List */}
+        <div className="flex-grow overflow-y-auto divide-y divide-gray-200">
           {cartItems.length === 0 ? (
             <div className="px-6 py-4 text-gray-600 text-center">Tu carrito está vacío.</div>
           ) : (
@@ -78,8 +86,7 @@ const CartModal: React.FC<CartModalProps> = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2"> {/* Changed to flex items-center space-x-2 for quantity controls */}
-                    {/* Quantity controls: */}
+                  <div className="flex items-center space-x-2">
                     {item.quantity > 1 ? (
                       <button
                         onClick={() => onDecrementCart(item.product.id)}
@@ -92,7 +99,7 @@ const CartModal: React.FC<CartModalProps> = ({
                         onClick={() => onRemoveFromCart(item.product.id)}
                         className="p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition"
                       >
-                        <FiTrash2 size={16} /> {/* Using FiTrash2 here for consistency with ProductDetail */}
+                        <FiTrash2 size={16} />
                       </button>
                     )}
                     <span className="text-lg font-bold">
@@ -111,7 +118,7 @@ const CartModal: React.FC<CartModalProps> = ({
           )}
         </div>
 
-        {/* Modal Footer: Total and Purchase Button */}
+        {/* Sidebar Footer: Total and Buttons */}
         <div className="px-6 py-4 border-t">
           <div className="flex items-center justify-between mb-4">
             <span className="text-lg font-bold">Total:</span>
@@ -119,12 +126,21 @@ const CartModal: React.FC<CartModalProps> = ({
               S/. {getCartTotal().toFixed(2)}
             </span>
           </div>
-          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition-colors">
-            Realizar Compra
+          <Link
+            to="/cart-details" // This Link will navigate to the full cart details page
+            onClick={onClose} // Close sidebar when navigating
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition-colors text-center block mb-2"
+          >
+            Ver Carrito {/* "View Cart" button */}
+          </Link>
+          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition-colors"
+                  onClick={onClose} // You might remove this or change its function later
+          >
+            Realizar Compra {/* This button might eventually move to CartDetailPage */}
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

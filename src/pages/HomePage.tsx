@@ -9,7 +9,7 @@ import CategoryFilter from "../components/CategoryFilter";
 
 import PurchaseTypeModal from "../components/Pedidos/PurchaseTypeModal";
 import AddressModal from "../components/Clientes/AddressModal";
-import CartModal from "../components/Pedidos/CartModal";
+// import CartModal from "../components/Pedidos/CartModal";
 import ConfirmationModal from "../components/Pedidos/ConfirmationModal";
 import { generatePdfBoleta } from '../utils/pdfGenerator';
 import { useCart } from '../context/CartContext';
@@ -161,12 +161,6 @@ const HomePage: React.FC = () => {
         currentAddress={address}
       />
 
-      <CartModal
-        showModal={showCartModal}
-        onClose={() => setShowCartModal(false)}
-        cartItems={cartItems}
-        getCartTotal={getCartTotal}
-      />
 
       <ConfirmationModal
         showModal={showConfirmation}

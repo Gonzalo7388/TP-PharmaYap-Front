@@ -8,6 +8,7 @@ import Proveedores from "../pages/Proveedores";
 import HomePage from "../pages/HomePage";
 import Trabajadores from "../pages/Trabajadores";
 import Pedidos from "../pages/Pedido";
+import CartDetailPage from '../pages/CartDetailPage'; // <--- Ensure this import is correct
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/crud/proveedores" element={<Proveedores />} />
       <Route path="/crud/trabajadores" element={<Trabajadores />} />
       <Route path="/crud/pedidos" element={<Pedidos />} />
+      <Route path="/cart-details" element={<CartDetailPage />} /> {/* <--- Ensure this route is present and correct */}
 
     </Routes>
   );
